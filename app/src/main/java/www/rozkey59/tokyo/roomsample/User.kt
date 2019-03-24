@@ -11,7 +11,7 @@ class User {
     var id: Int = 0
 
     @ColumnInfo(name= "name")
-    var name: String = ""
+    var name: String? = null
 
-    var age: Int = 0
+    var age: Int? = null
 }
