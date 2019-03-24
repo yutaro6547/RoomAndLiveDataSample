@@ -19,19 +19,22 @@ class MainActivity : AppCompatActivity() {
         val deleteButton = findViewById<Button>(R.id.delete_button)
         val showButton = findViewById<Button>(R.id.show_button)
 
-        val db = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "database-name").build()
+        val db = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "User").build()
 
 
         val defaultUser = User()
-        defaultUser.id = Random(1000000).nextInt()
+        defaultUser.id = 127
         defaultUser.name = "Initial"
         defaultUser.age = 24
+        var count = 0
 
         saveButton.setOnClickListener {
-            val user = User()
-            user.id = Random(1000000).nextInt()
-            user.name = Random(1000000).nextInt().toString()
-            user.age = Random(1000000).nextInt()
+            count++
+            val user = defaultUser
+            user.id = defaultUser.id + count
+            defaultUser.name = "Initial::$count"
+            defaultUser.age = 24 + count
+
             thread {
                 db.userDao().insert(user)
             }
