@@ -1,7 +1,9 @@
 package www.rozkey59.tokyo.roomsample
 
 import android.arch.lifecycle.Observer
+import android.arch.persistence.db.SupportSQLiteDatabase
 import android.arch.persistence.room.Room
+import android.arch.persistence.room.migration.Migration
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -19,7 +21,13 @@ class MainActivity : AppCompatActivity() {
         val deleteButton = findViewById<Button>(R.id.delete_button)
         val showButton = findViewById<Button>(R.id.show_button)
 
-        val db = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "User").build()
+        val db = Room.databaseBuilder(applicationContext, AppDatabase::class.java, "User")
+            .addMigrations(object : Migration(1, 2) {
+                override fun migrate(database: SupportSQLiteDatabase) {
+                    database.execSQL("ALTER TABLE User ADD gender Int")
+                }
+            })
+            .build()
 
 
         val defaultUser = User()

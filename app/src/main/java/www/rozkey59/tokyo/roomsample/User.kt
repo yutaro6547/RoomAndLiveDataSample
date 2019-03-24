@@ -13,5 +13,8 @@ class User {
     @ColumnInfo(name= "name")
     var name: String? = null
 
+    @ColumnInfo(name= "gender")
+    var gender: Int? = null
+
     var age: Int? = null
 }
