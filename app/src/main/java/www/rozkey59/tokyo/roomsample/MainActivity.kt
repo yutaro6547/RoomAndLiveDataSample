@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
 
 
         val defaultUser = User()
-        defaultUser.id = 127
+        defaultUser.id = Random(1000000).nextInt()
         defaultUser.name = "Initial"
         defaultUser.age = 24
         var count = 0
